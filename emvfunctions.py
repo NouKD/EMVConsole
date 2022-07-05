@@ -77,18 +77,18 @@ class EmvFunctions(SmartFunctions):
 
 		response, sw1, sw2 = self.selectApplication(IPAY)
 		
-		print toHexString(response)
+		print (toHexString(response))
 		if ((sw1 == 0x90) and (sw2 == 0x00)):
 			
 			# Find SFI (0x88)
 			firstPSE = uglyParse(TAG_SFI, response)
 
-			print "[!] First PSE Record at: ", toHexString(firstPSE)
+			print ("[!] First PSE Record at: ", toHexString(firstPSE))
 			
 			SFI = [((firstPSE[0] << 3) | 4)]
-			print "SFI: ", SFI
+			print ("SFI: ", SFI)
 			#record #1, for some "apparant"
- 			response, sw1, sw2 = self.readRecord([0x01] + SFI)
+ 			response, sw1, sw2 = self.readRecord([0x01]+SFI)
 			
 			
 			offset = 0
